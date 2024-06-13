@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Select Quality</h1>
+        <div class="mt-3">
+            <img src="<%= thumbnail %>" alt="Thumbnail" class="img-thumbnail">
+        </div>
+        <ul class="list-group mt-3">
+            <% formats.forEach(function(format) { %>
+                <li class="list-group-item">
+                    <a href="/download?url=<%= url %>&quality=<%= format.itag %>&title=<%= encodeURIComponent(title) %>" class="btn btn-primary">
+                        <%= format.qualityLabel || format.resolution %> (<%= format.container %>)
+                    </a>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>
