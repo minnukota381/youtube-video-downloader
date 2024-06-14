@@ -13,8 +13,8 @@ A simple web application built with Node.js and Express to search for YouTube vi
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your_username/your_repository.git
-   cd your_repository
+   git clone https://github.com/minnukota381/ytdl-downloader-node.git
+   cd ytdl-downloader-node
    ```
 
 2. Install dependencies:
