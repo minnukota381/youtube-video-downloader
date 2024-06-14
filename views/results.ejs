@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Video Downloader</title>
+    <title>Nep-YTDL - YouTube Video Downloader</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
     <style>
         body {
             background-color: #141414;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #222;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .navbar img {
+            height: 50px;
+            margin-top: 5px;
         }
 
         .container {
@@ -89,8 +104,12 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <img src="youtube-logo.png" alt="YouTube Logo">
+    </div>
+
     <div class="container">
-        <h1>YouTube Video Downloader</h1>
+        <h1>Nep-YTDL - YouTube Video Downloader</h1>
         <video controls>
             <source src="/stream?url=<%= encodeURIComponent(url) %>&quality=<%= encodeURIComponent(formats[0].itag) %>" type="video/mp4">
             Your browser does not support the video tag.
@@ -130,3 +149,4 @@
     </script>
 </body>
 </html>
+
