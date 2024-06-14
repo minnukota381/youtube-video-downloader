@@ -51,13 +51,3 @@ A simple web application built with Node.js and Express to search for YouTube vi
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-### Key Points to Consider:
-
-1. **Description**: Clearly state what your project does at the beginning.
-2. **Features**: List out the main functionalities of your application.
-3. **Installation**: Provide clear steps to clone, install dependencies, and start the project.
-4. **Usage**: Describe how users can interact with your application.
-5. **Dependencies**: Link to the npm packages or libraries your project depends on.
-6. **Screenshots**: Include relevant screenshots to give users a preview of the application.
-7. **License**: Specify the license under which your project is distributed.
