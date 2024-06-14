@@ -40,6 +40,38 @@ app.get('/search', async (req, res) => {
     }
 });
 
+// Route to handle video streaming
+app.get('/stream', async (req, res) => {
+    const videoURL = req.query.url;
+    const quality = req.query.quality;
+    if (!videoURL || !quality) {
+        return res.status(400).send('URL and quality are required');
+    }
+
+    try {
+        const videoInfo = await ytdl.getInfo(videoURL);
+        const format = ytdl.chooseFormat(videoInfo.formats, { quality: quality });
+
+        if (!format) {
+            return res.status(404).send('No such format found');
+        }
+
+        // Set content type to video/mp4 for streaming
+        res.header('Content-Type', 'video/mp4');
+
+        // Use ytdl to directly pipe the video stream to the response
+        ytdl(videoURL, { format: format })
+            .on('error', (err) => {
+                console.error('Error:', err);
+                res.status(500).send('Failed to stream video');
+            })
+            .pipe(res);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Failed to stream video');
+    }
+});
+
 // Route to handle video download
 app.get('/download', async (req, res) => {
     const videoURL = req.query.url;
