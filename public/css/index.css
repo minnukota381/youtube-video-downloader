@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(45deg, #FF9A9E, #FAD0C4);
+    background: linear-gradient(45deg, #a25b5b, #7f44ad);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
     display: flex;
@@ -7,7 +7,7 @@ body {
 }
 
 .navbar {
-    background: linear-gradient(to right, #FF5F6D, #FFC371);
+    background: linear-gradient(to right, #86000b, #420869);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -26,17 +26,17 @@ body {
 }
 
 .nav-link:hover {
-    color: #ffd700;
+    color: #0040ff;
 }
 
 .container {
     max-width: 600px;
-    margin: 30px auto;
-    padding: 40px;
+    margin: 20px auto; /* Decreased margin */
+    padding: 30px; /* Decreased padding */
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 30px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-    flex-grow: 1;
+    /* flex-grow: 1; */
 }
 
 h1 {
@@ -86,4 +86,20 @@ h1 {
 
 .btn:hover {
     background: linear-gradient(to right, #FF4B2B, #FFB347);
+}
+
+.footer {
+    background-color: #535353;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer .container {
+    max-width: 600px;
+}
+
+.footer .text-muted {
+    font-size: 14px;
 }
