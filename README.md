@@ -40,6 +40,10 @@ A simple web application built with Node.js and Express to search for YouTube vi
 ## Dependencies
 
 - [Express](https://www.npmjs.com/package/express): Fast, unopinionated, minimalist web framework for Node.js.
+- [ejs](https://www.npmjs.com/package/ejs): Embedded JavaScript templating engine.
+- [axios](https://www.npmjs.com/package/axios): HTTP client for the browser and Node.js.
+- [ytpl](https://www.npmjs.com/package/ytpl): YouTube playlist downloader.
+- [ytdl](https://www.npmjs.com/package/ytdl): YouTube video downloader.
 - [ytdl-core](https://www.npmjs.com/package/ytdl-core): YouTube video downloader in pure JavaScript.
 - [fluent-ffmpeg](https://www.npmjs.com/package/fluent-ffmpeg): A fluent API to FFmpeg (video encoding).
 
