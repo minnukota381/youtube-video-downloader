@@ -3,11 +3,21 @@ const ytdl = require('ytdl-core');
 const path = require('path');
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
+const rateLimit = require('express-rate-limit');
 
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 const app = express();
 const port = 3000;
+
+// Rate limiting to prevent too many requests
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: 'Too many requests from this IP, please try again later'
+});
+
+app.use(limiter);
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
@@ -56,10 +66,8 @@ app.get('/stream', async (req, res) => {
             return res.status(404).send('No such format found');
         }
 
-        // Set content type to video/mp4 for streaming
         res.header('Content-Type', 'video/mp4');
 
-        // Use ytdl to directly pipe the video stream to the response
         ytdl(videoURL, { format: format })
             .on('error', (err) => {
                 console.error('Error:', err);
@@ -91,13 +99,26 @@ app.get('/download', async (req, res) => {
 
         res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
 
-        // Use ytdl to directly pipe the video stream to the response
-        ytdl(videoURL, { format: format })
-            .on('error', (err) => {
-                console.error('Error:', err);
-                res.status(500).send('Failed to download video');
+        const stream = ytdl(videoURL, { format: format })
+            .on('response', (response) => {
+                console.log('Response Headers:', response.headers);
             })
-            .pipe(res);
+            .on('error', (err) => {
+                console.error('Stream Error:', err);
+                res.status(500).send('Failed to download video');
+            });
+
+        const ffmpegProcess = ffmpeg(stream)
+            .format('mp4')
+            .on('end', () => {
+                console.log('Download finished successfully');
+            })
+            .on('error', (err) => {
+                console.error('FFmpeg Error:', err);
+                res.status(500).send('Failed to process video');
+            });
+
+        ffmpegProcess.pipe(res, { end: true });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Failed to download video');
