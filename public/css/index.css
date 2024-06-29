@@ -31,8 +31,8 @@ body {
 
 .container {
     max-width: 600px;
-    margin: 20px auto; /* Decreased margin */
-    padding: 30px; /* Decreased padding */
+    margin: 20px auto;
+    padding: 30px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 30px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
