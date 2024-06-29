@@ -12,19 +12,15 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-// Set EJS as the templating engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Route to render the index page
 app.get('/', (req, res) => {
     res.render('indexx');
 });
 
-// Route to handle playlist download
 app.get('/download-playlist', async (req, res) => {
     const playlistURL = req.query.url;
     if (!playlistURL) {
@@ -39,7 +35,7 @@ app.get('/download-playlist', async (req, res) => {
             fs.mkdirSync(downloadDir, { recursive: true });
         }
 
-        const ytDlpPath = 'C:\\Program Files\\yt-dlp\\yt-dlp.exe'; // Update this path
+        const ytDlpPath = 'C:\\Program Files\\yt-dlp\\yt-dlp.exe';
         const ytDlpProcess = spawn(ytDlpPath, ['-o', `${downloadDir}/%(title)s.%(ext)s`, '-f', 'best', playlistURL]);
 
         ytDlpProcess.stdout.on('data', (data) => {
@@ -73,7 +69,6 @@ app.get('/download-playlist', async (req, res) => {
 
             archive.finalize();
 
-            // Clean up download directory after zipping
             await fs.promises.rm(downloadDir, { recursive: true, force: true });
         });
     } catch (error) {
