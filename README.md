@@ -47,7 +47,6 @@ A simple web application built with Node.js and Express to search for YouTube vi
 - [ytdl-core](https://www.npmjs.com/package/ytdl-core): YouTube video downloader in pure JavaScript.
 - [fluent-ffmpeg](https://www.npmjs.com/package/fluent-ffmpeg): A fluent API to FFmpeg (video encoding).
 
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
