@@ -1,6 +1,7 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
 const path = require('path');
+const sanitize = require('sanitize-filename');
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('@ffmpeg-installer/ffmpeg').path;
 
@@ -31,7 +32,7 @@ app.get('/search', async (req, res) => {
         const title = info.videoDetails.title;
         res.render('results', { url: videoURL, formats: formats, thumbnail: thumbnail, title: title });
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching video information:', error);
         res.status(500).send('Failed to fetch video information');
     }
 });
@@ -55,12 +56,12 @@ app.get('/stream', async (req, res) => {
 
         ytdl(videoURL, { format: format })
             .on('error', (err) => {
-                console.error('Error:', err);
+                console.error('Error streaming video:', err);
                 res.status(500).send('Failed to stream video');
             })
             .pipe(res);
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching video info:', error);
         res.status(500).send('Failed to stream video');
     }
 });
@@ -68,29 +69,41 @@ app.get('/stream', async (req, res) => {
 app.get('/download', async (req, res) => {
     const videoURL = req.query.url;
     const quality = req.query.quality;
-    const title = decodeURIComponent(req.query.title);
-    if (!videoURL || !quality || !title) {
-        return res.status(400).send('URL, quality, and title are required');
+    let title = decodeURIComponent(req.query.title || 'video');
+    
+    if (!videoURL || !quality) {
+        console.error('Missing URL or quality');
+        return res.status(400).send('URL and quality are required');
     }
 
     try {
+        console.log(`Fetching video info for URL: ${videoURL}`);
         const videoInfo = await ytdl.getInfo(videoURL);
+        console.log('Video info fetched successfully');
+
+        console.log(`Choosing format with quality: ${quality}`);
         const format = ytdl.chooseFormat(videoInfo.formats, { quality: quality });
 
         if (!format) {
+            console.error('No matching format found');
             return res.status(404).send('No such format found');
         }
+
+        console.log('Format chosen successfully');
+
+        title = sanitize(title);
+        title = title.replace(/[^\x20-\x7E]/g, '');
 
         res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
 
         ytdl(videoURL, { format: format })
             .on('error', (err) => {
-                console.error('Error:', err);
+                console.error('Error downloading video:', err);
                 res.status(500).send('Failed to download video');
             })
             .pipe(res);
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching video info:', error);
         res.status(500).send('Failed to download video');
     }
 });
