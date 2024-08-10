@@ -52,14 +52,23 @@ app.get('/stream', async (req, res) => {
             return res.status(404).send('No such format found');
         }
 
+        console.log(`Streaming video in format with quality: ${quality}`);
+
         res.header('Content-Type', 'video/mp4');
 
-        ytdl(videoURL, { format: format })
-            .on('error', (err) => {
-                console.error('Error streaming video:', err);
-                res.status(500).send('Failed to stream video');
-            })
-            .pipe(res);
+        ytdl(videoURL, {
+            format: format,
+            requestOptions: {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+            }
+        })
+        .on('error', (err) => {
+            console.error('Error streaming video:', err);
+            res.status(500).send('Failed to stream video');
+        })
+        .pipe(res);
     } catch (error) {
         console.error('Error fetching video info:', error);
         res.status(500).send('Failed to stream video');
@@ -96,12 +105,19 @@ app.get('/download', async (req, res) => {
 
         res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
 
-        ytdl(videoURL, { format: format })
-            .on('error', (err) => {
-                console.error('Error downloading video:', err);
-                res.status(500).send('Failed to download video');
-            })
-            .pipe(res);
+        ytdl(videoURL, {
+            format: format,
+            requestOptions: {
+                headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                }
+            }
+        })
+        .on('error', (err) => {
+            console.error('Error downloading video:', err);
+            res.status(500).send('Failed to download video');
+        })
+        .pipe(res);
     } catch (error) {
         console.error('Error fetching video info:', error);
         res.status(500).send('Failed to download video');
