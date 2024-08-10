@@ -1,105 +1,103 @@
 body {
-    background: linear-gradient(45deg, #a25b5b, #7f44ad);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
 }
 
 .navbar {
-    background: linear-gradient(to right, #86000b, #420869);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
 .navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
     color: #fff;
-    font-weight: bold;
-    font-size: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .nav-link {
-    color: #fff;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8) !important;
     transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #0040ff;
+    color: #fff !important;
 }
 
-.container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 30px;
+.main-card {
     background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 30px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-    /* flex-grow: 1; */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
 }
 
-h1 {
-    text-align: center;
-    color: #FF5F6D;
-    margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-.form-group {
-    position: relative;
+.card-title {
+    color: #4a4a4a;
+    font-weight: 700;
 }
 
 .form-control {
-    padding: 20px 60px 20px 30px;
     border: none;
-    border-radius: 40px;
+    border-radius: 25px;
+    padding: 12px 20px;
     background-color: rgba(255, 255, 255, 0.8);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-    color: #FF5F6D;
-    font-weight: bold;
-    font-size: 1.2rem;
+    transition: all 0.3s ease;
 }
 
-.form-control::placeholder {
-    color: #FF5F6D;
-    opacity: 0.7;
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    background-color: #fff;
 }
 
-.btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    height: calc(100% - 10px);
-    padding: 0 30px;
-    background: linear-gradient(to right, #FF5F6D, #FFC371);
-    color: #fff;
-    border: none;
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    font-size: 1.2rem;
+.btn-primary {
+    background-color: #667eea;
+    border-color: #667eea;
+    border-radius: 25px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
 }
 
-.btn:hover {
-    background: linear-gradient(to right, #FF4B2B, #FFB347);
+.btn-primary:hover {
+    background-color: #764ba2;
+    border-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.video-info h2 {
+    color: #4a4a4a;
+    font-weight: 700;
+}
+
+.list-group-item {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.badge-primary {
+    background-color: #667eea;
 }
 
 .footer {
-    background-color: #535353;
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
 }
 
-.footer .container {
-    max-width: 600px;
+.footer-text {
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.footer .text-muted {
-    font-size: 14px;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.main-card {
+    animation: fadeIn 0.5s ease-out;
 }
