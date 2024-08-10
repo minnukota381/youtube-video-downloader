@@ -7,124 +7,144 @@
     <link rel="icon" type="image/png" href="images/video.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
         body {
-            background-color: #141414;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Poppins', sans-serif;
             color: #fff;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .navbar {
-            background-color: #222;
-            padding: 10px 0;
-            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
         }
 
         .navbar img {
-            height: 50px;
-            margin-top: 5px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
         }
 
         .container {
-            max-width: 600px;
+            flex: 1;
+            max-width: 800px;
             margin: 50px auto;
-            background-color: #222;
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #fff;
         }
 
         video {
             display: block;
             max-width: 100%;
             height: auto;
-            margin: 0 auto 20px;
-            border-radius: 5px;
+            margin: 0 auto 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .dropdown {
-            margin-bottom: 20px;
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
-        .dropdown select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #333;
-            border-radius: 5px;
-            background-color: #222;
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 10px;
             color: #fff;
-            font-size: 16px;
+            padding: 12px;
         }
 
         .list-group-item {
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.05);
             border: none;
-            padding: 10px 0;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            padding: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         .btn {
-            display: inline-block;
             padding: 10px 20px;
             background-color: #e50914;
             color: #fff;
             border: none;
-            border-radius: 5px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-            font-weight: bold;
+            border-radius: 10px;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            text-decoration: none; /* Remove default underline */
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
             background-color: #b00710;
-        }
-
-        .btn i {
-            margin-right: 5px;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
         }
 
         .download-icon {
-            color: #fff;
-            font-size: 18px;
+            margin-right: 8px;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <img src="images/video.svg" alt="YouTube Logo">
-    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/video.svg" alt="YouTube Logo">
+                Nep-YTDL
+            </a>
+        </div>
+    </nav>
 
     <div class="container">
-        <h1>Nep-YTDL - YouTube Video Downloader</h1>
-        <video controls>
+        <h1>YouTube Video Downloader</h1>
+        <video controls class="mb-4">
             <source src="/stream?url=<%= encodeURIComponent(url) %>&quality=<%= encodeURIComponent(formats[0].itag) %>" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
-        <div class="dropdown">
+        <div class="form-group">
             <label for="format">Select Format:</label>
-            <select id="format" onchange="changeFormat(this)">
+            <select id="format" class="form-control" onchange="changeFormat(this)">
                 <option value="webm">WEBM</option>
                 <option value="mp4">MP4</option>
             </select>
         </div>
         
-        <div id="download-options">
+        <div id="download-options" class="mt-4">
             <ul class="list-group">
                 <% formats.forEach(function(format) { %>
                     <li class="list-group-item <% if (format.container === 'mp4') { %>mp4 <% } else if (format.container === 'webm') { %>webm <% } %>">
@@ -150,4 +170,3 @@
     </script>
 </body>
 </html>
-
