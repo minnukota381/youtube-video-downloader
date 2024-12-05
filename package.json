@@ -2,11 +2,11 @@
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "archiver": "^7.0.1",
-    "axios": "^1.7.8",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "cheerio": "^1.0.0",
     "ejs": "^3.1.10",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "express-rate-limit": "^7.4.1",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.3",
