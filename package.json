@@ -6,7 +6,7 @@
     "bootstrap": "^5.3.3",
     "cheerio": "^1.0.0",
     "ejs": "^3.1.10",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.3",
