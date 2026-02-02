@@ -4,7 +4,7 @@
     "archiver": "^7.0.1",
     "axios": "^1.13.4",
     "bootstrap": "^5.3.8",
-    "cheerio": "^1.1.2",
+    "cheerio": "^1.2.0",
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "express-rate-limit": "^8.2.1",
